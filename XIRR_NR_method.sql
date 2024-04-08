@@ -1,24 +1,22 @@
 
-CREATE OR REPLACE FUNCTION cox_schema.xirr_nr(
+CREATE OR REPLACE FUNCTION xirr_nr(
 	initial_guess numeric DEFAULT 0.1,
 	max_iterations integer DEFAULT 100,
 	debug_log boolean DEFAULT false)
     RETURNS numeric
     LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE PARALLEL UNSAFE
 AS $BODY$
 DECLARE
-	tolerance 		 DECIMAL(1,9) = 0.000000001;
-	iterator 		 INT = 0;
+	tolerance 	 DECIMAL(1,9) = 0.000000001;
+	iterator 	 INT = 0;
 	investment_count INT = 0;
 	income_count	 INT = 0;	
 	total_investment DECIMAL(40,8);
 	total_income	 DECIMAL(40,8);
-	f_xirr			 DECIMAL(40,8);
-	f_xirr_df		 DECIMAL(40,8);
-	xirr_n			 DECIMAL(20,8);
-	xirr_n1			 DECIMAL(20,8);
+	f_xirr		 DECIMAL(40,8);
+	f_xirr_df	 DECIMAL(40,8);
+	xirr_n		 DECIMAL(20,8);
+	xirr_n1		 DECIMAL(20,8);
 
 BEGIN
 
